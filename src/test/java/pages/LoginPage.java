@@ -1,46 +1,39 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class LoginPage extends BasePage {
-
     String email;
     String password;
     public static final String PATH_TO_PROPERTIES = "src/test/resources/config.properties";
+    public static final String URL = "https://trello.com/login";
 
 
     public LoginPage openPage() {
-        open("https://trello.com/login");
+        open(URL);
         return this;
     }
 
     public LoginPage isPageOpened() {
-        try {
-            $(By.className("global-footer-list")).should(exist);
-        } catch (TimeoutException Ex) {
-            Assert.fail("Страница не загрузилась, т.к. не появилась нижняя шторка со всякими штуками");
-        }
+        $(By.className("global-footer-list")).waitUntil(Condition.visible, 24000);
         return this;
     }
 
-    public MainPage login() {
+    public MainPage login() throws InterruptedException {
         open("https://trello.com/login");
         $(By.id("user")).setValue(email);
         $(By.id("password")).setValue(password);
         $(By.id("login")).click();
-        $(By.id("password")).setValue(password);
+        Thread.sleep(2000);
         $(By.id("password")).setValue(password);
         $(By.className("css-t5emrf")).click();
         return new MainPage();
@@ -53,12 +46,12 @@ public class LoginPage extends BasePage {
         $(By.id("login")).click();
     }
 
-    public void loginForErrorVars2(String email, String password) {
+    public void loginForErrorVars2(String email, String password) throws InterruptedException {
         open("https://trello.com/login");
         $(By.id("user")).setValue(email);
         $(By.id("password")).setValue(password);
         $(By.id("login")).click();
-        $(By.id("password")).setValue(password);
+        Thread.sleep(2000);
         $(By.id("password")).setValue(password);
         $(By.className("css-t5emrf")).click();
     }

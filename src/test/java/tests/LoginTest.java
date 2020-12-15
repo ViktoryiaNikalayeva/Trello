@@ -8,7 +8,7 @@ import static org.testng.Assert.assertEquals;
 public class LoginTest extends BaseTest {
 
     @Test(description = "User should pass authorization and appear at MainPage")
-    public void loginAndGoToMainPage() {
+    public void loginAndGoToMainPage() throws InterruptedException {
         loginPage
                 .openPage()
                 .isPageOpened()
@@ -50,7 +50,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(dataProvider = "errorVars2", description = "check variable errors of authorization process")
-    public void errorVars2(String email, String password, String errorMessage2) {
+    public void errorVars2(String email, String password, String errorMessage2) throws InterruptedException {
         loginPage
                 .openPage()
                 .isPageOpened()
