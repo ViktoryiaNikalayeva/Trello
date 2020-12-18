@@ -1,6 +1,5 @@
 package pages;
 
-
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -16,7 +15,7 @@ public class MainPage extends BasePage {
     }
 
     public MainPage isPageOpened() {
-            $(byClassName("_3qwe2tMMFonNvf")).waitUntil(exist, 24000);
+        $(byClassName("_3qwe2tMMFonNvf")).waitUntil(exist, 24000);
         return this;
     }
 
@@ -24,11 +23,22 @@ public class MainPage extends BasePage {
         $(byXpath("//span[@class='icon-add icon-sm _2aV_KY1gTq1qWc']")).click();
         $(byClassName("_1CLyNodCAa-vQi")).setValue("DreamTeam");
         $(byClassName("css-iikl2v")).click();
-//        $$(byClassName("css-1h40s7-control _1T1MG_BX1zeaq8")).get(2).click();
+        $(byXpath("//*[text()='Маркетинг']")).click();
         $(byClassName("_15aIJYNKhrO4vB")).setValue("Team for test");
-        $(byClassName("X1P6DVryq8CYGC voB8NatlbuEme5 _21upOlzpUQJcdT _2srCG79MESAdFL")).click();
-        $(byId("add-members-input")).setValue("n77@mailinator.com");
-        $(byId("team-invite-submit-button")).click();
+        $(byClassName("_1aS0LdGertk5P7")).click();
+        $(byClassName("autocomplete-input")).sendKeys("n77@mailinator.com");
+        $(byXpath("//button[@data-test-id = 'team-invite-submit-button']")).click();
         $(byClassName("_3Ea60-0nkKsQ4D")).should(exist);
     }
+
+    public BoardPage createBoard() {
+        $(byClassName("_3qwe2tMMFonNvf")).click();
+        $(byText("Создать доску")).click();
+        $(byClassName("_23NUW98LaZfBpQ")).sendKeys("GreatDeal");
+        $(byXpath("//*[@class= '_2SGKaE34Vsusf2']/child::button")).click();
+        $(byXpath("//span[@class ='org-label']")).should(exist);
+        return new BoardPage();
+    }
+
+
 }

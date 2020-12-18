@@ -21,15 +21,11 @@ public class LoginTest extends BaseTest {
         return new Object[][]{
                 {"", "password", "Отсутствует адрес электронной почты"},
                 {"", "", "Отсутствует адрес электронной почты"},
-//1 вариант
-                {"Guy", "", "Аккаунта с таким адресом электронной почты не существует"},
-                {"Guy", "password", "Аккаунта с таким адресом электронной почты не существует"},
-                {"v66@mailinator.com", "", "Аккаунта с таким адресом электронной почты не существует"},
-                {"v66@mailinator.com", "Fawkes", "Аккаунта с таким именем пользователя не существует"},
-       };
+                {"", "Fawkes", "Отсутствует адрес электронной почты"},
+        };
     }
 
-    @Test(dataProvider = "errorVars1", description = "check variable errors of authorization process")
+    @Test(dataProvider = "errorVars1", description = "check  errors of authorization (null email + variants)")
     public void errorVars1(String email, String password, String errorMessage1) {
         loginPage
                 .openPage()
@@ -41,15 +37,12 @@ public class LoginTest extends BaseTest {
     @DataProvider
     public Object[][] errorVars2() {
         return new Object[][]{
-//2 вариант
-                {"v66mailinator.com", "", "Неверный адрес электронной почты и/или пароль."},
-                {"v66mailinator.com", "Неверный адрес электронной почты и/или пароль."},
-                {"Guy", "", "Неверный адрес электронной почты и/или пароль."},
-                {"Guy", "password", "Неверный адрес электронной почты и/или пароль."},
+                {"v66@mailinator.com", "", "Войдите, чтобы перейти далее:"},
+                {"v66@mailinator.com", "Fawkes", "Войдите, чтобы перейти далее:"},
         };
     }
 
-    @Test(dataProvider = "errorVars2", description = "check variable errors of authorization process")
+    @Test(dataProvider = "errorVars2", description = "check  errors of authorization (correct email + variants)")
     public void errorVars2(String email, String password, String errorMessage2) throws InterruptedException {
         loginPage
                 .openPage()
@@ -58,16 +51,16 @@ public class LoginTest extends BaseTest {
         assertEquals(loginPage.getErrorMessage2().getText(), errorMessage2);
     }
 
-//ОК
-
     @DataProvider
     public Object[][] errorVars3() {
         return new Object[][]{
-                {"guy@gmail.com", "Fawkes", "Указан неверный адрес и/или пароль. Нужна помощь?"},
+                {"guy@gmail.com", "Fawkes", "Не удается войти?"},
+                {"guy@gmail.com", "password", "Не удается войти?"},
+                {"guy@gmail.com", "", "Не удается войти?"},
         };
     }
 
-    @Test(dataProvider = "errorVars3", description = "check variable errors of authorization process (password)")
+    @Test(dataProvider = "errorVars3", description = "check errors of authorization (incorrect email + variants)")
     public void errorVars3(String email, String password, String errorMessage3) {
         loginPage
                 .openPage()
@@ -76,3 +69,4 @@ public class LoginTest extends BaseTest {
         assertEquals(loginPage.getErrorMessage3().getText(), errorMessage3);
     }
 }
+

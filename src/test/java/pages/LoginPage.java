@@ -1,13 +1,13 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -24,58 +24,55 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage isPageOpened() {
-        $(By.className("global-footer-list")).waitUntil(Condition.visible, 24000);
+        $(byClassName("global-footer-list")).waitUntil(Condition.visible, 24000);
         return this;
     }
 
     public MainPage login() throws InterruptedException {
         open("https://trello.com/login");
-        $(By.id("user")).setValue(email);
-        $(By.id("password")).setValue(password);
-        $(By.id("login")).click();
+        $(byId("user")).sendKeys(email);
+        $(byId("password")).sendKeys(password);
+        $(byId("login")).click();
         Thread.sleep(2000);
-        $(By.id("password")).setValue(password);
-        $(By.className("css-t5emrf")).click();
+        $(byId("password")).sendKeys(password);
+        $(byClassName("css-t5emrf")).click();
         return new MainPage();
     }
 
     public void loginForErrorVars1and3(String email, String password) {
         open("https://trello.com/login");
-        $(By.id("user")).setValue(email);
-        $(By.id("password")).setValue(password);
-        $(By.id("login")).click();
+        $(byId("user")).sendKeys(email);
+        $(byId("password")).sendKeys(password);
+        $(byId("login")).click();
     }
 
     public void loginForErrorVars2(String email, String password) throws InterruptedException {
         open("https://trello.com/login");
-        $(By.id("user")).setValue(email);
-        $(By.id("password")).setValue(password);
-        $(By.id("login")).click();
+        $(byId("user")).sendKeys(email);
+        $(byId("password")).sendKeys(password);
+        $(byId("login")).click();
         Thread.sleep(2000);
-        $(By.id("password")).setValue(password);
-        $(By.className("css-t5emrf")).click();
+        $(byId("password")).sendKeys(password);
+        $(byClassName("css-t5emrf")).click();
     }
 
-    public WebElement getErrorMessage1() {
-        return $(By.xpath("//div[@id='error']/child::*"));
+    public WebElement getErrorMessage1()
+    {
+        return $(byXpath("//div[@id='error']/child::*"));
     }
 
     public WebElement getErrorMessage2() {
-        return $(By.xpath("//div[@class = 'sc-jnlKLf jPmbfd']/child::span)"));
+        return $(byText("Войдите, чтобы перейти далее:"));
     }
-
     public WebElement getErrorMessage3() {
-        return $(By.xpath("//div[@id='password-error']/child::*"));
+        return $(byText("Не удается войти?"));
     }
 
 
     public LoginPage() {
         FileInputStream fileInputStream;
-        //инициализируем специальный объект Properties
-        //типа Hashtable для удобной работы с данными
         Properties prop = new Properties();
         try {
-            //обращаемся к файлу и получаем данные
             fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
             prop.load(fileInputStream);
             email = prop.getProperty("email");
