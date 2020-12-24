@@ -7,13 +7,17 @@ import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
 
-    @Test(description = "User should pass authorization and appear at MainPage")
-    public void loginAndGoToMainPage() throws InterruptedException {
+    @Test(description = "user should pass authorization and appear at MainPage")
+    public void loginAndGoToMainPage() {
+        enterPage
+                .openPage()
+                .isPageOpened()
+                .startAndEnter();
         loginPage
                 .openPage()
                 .isPageOpened()
                 .login();
-        mainPage.isPageOpened();
+        assertEquals(loginPage.isUserLogined().getText(), "Viktoryia");
     }
 
     @DataProvider
@@ -68,5 +72,7 @@ public class LoginTest extends BaseTest {
                 .loginForErrorVars1and3(email, password);
         assertEquals(loginPage.getErrorMessage3().getText(), errorMessage3);
     }
+
+
 }
 

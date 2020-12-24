@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.BoardPage;
+import pages.EnterPage;
 import pages.LoginPage;
 import pages.MainPage;
 
@@ -14,6 +15,7 @@ public class BaseTest {
     LoginPage loginPage;
     MainPage mainPage;
     BoardPage boardPage;
+    EnterPage enterPage;
 
     @BeforeMethod
     public void setup() {
@@ -25,6 +27,7 @@ public class BaseTest {
         loginPage = new LoginPage();
         mainPage = new MainPage();
         boardPage = new BoardPage();
+        enterPage = new EnterPage();
 
     }
 
