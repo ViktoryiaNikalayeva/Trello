@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -50,14 +51,14 @@ public class BoardPage {
     public static final String CARD_AS_TEMPLATE = ("Создать карточку по шаблону");
     public static final String LIST_ARCHIVE_TRUE = "Нужно сделать";
 
+    @Step("open BoardPage https://trello.com/board")
     public BoardPage openPage() {
-        log.fatal("open BoardPage https://trello.com/board");
         open(URL);
         return this;
     }
 
+    @Step("check that page https://trello.com/board")
     public BoardPage isPageOpened() {
-        log.fatal("check that page https://trello.com/board");
         $(byCssSelector(PAGE_OPEN)).waitUntil(Condition.visible, 30000, 500);
         return this;
     }
@@ -178,6 +179,6 @@ public class BoardPage {
     }
 
     public WebElement isListArchived() {
-        return $(byText(LIST_ARCHIVE_TRUE )).shouldNot(exist);
+        return $(byText(LIST_ARCHIVE_TRUE)).shouldNot(exist);
     }
 }

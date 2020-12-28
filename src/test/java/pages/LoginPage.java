@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebElement;
 
@@ -28,20 +29,23 @@ public class LoginPage extends BasePage {
     public static final String BUTTON_TO_USER = "_24AWINHReYjNBf";
     public static final String USER_NAME= "_1njv2a9PIrnydF";
 
+
+    @Step("open LoginPage trello.com/login")
     public LoginPage openPage() {
-        log.fatal("open LoginPage trello.com/login");
         open(URL);
         return this;
     }
 
+
+    @Step("check that page trello.com/login is opened")
     public LoginPage isPageOpened() {
-        log.debug("check that page trello.com/login is opened");
         $(byClassName(PAGE_OPEN_TRUE)).waitUntil(exist, 30000, 500);
         return this;
     }
 
+    @Step("open LoginPage trello.com/login and try to login")
     public MainPage login()  {
-        log.fatal("open LoginPage trello.com/login");
+        log.info("open LoginPage trello.com/login");
         open(URL);
         log.info("find input of email and enter email");
         $(byId(USER)).waitUntil(Condition.visible, 30000, 500).sendKeys(email);
@@ -53,8 +57,9 @@ public class LoginPage extends BasePage {
         return new MainPage();
     }
 
+    @Step("check incorrect login part 1")
     public void loginForErrorVars1(String email, String password) {
-        log.fatal("open LoginPage trello.com/login");
+        log.info("open LoginPage trello.com/login");
         open(URL);
         log.info("find input of email and enter email");
         $(byId(USER)).waitUntil(Condition.visible, 30000, 500).sendKeys(email);
@@ -62,9 +67,9 @@ public class LoginPage extends BasePage {
         $(byId(PASSWORD)).sendKeys(password);
         $(byId(LOGIN_BUTTON)).click();
     }
-
+    @Step("check incorrect login part 2")
     public void loginForErrorVars2(String email, String password) {
-        log.fatal("open LoginPage trello.com/login");
+        log.info("open LoginPage trello.com/login");
         open(URL);
         log.info("find input of email and enter email");
         $(byId(USER)).waitUntil(Condition.visible, 30000, 500).sendKeys(email);

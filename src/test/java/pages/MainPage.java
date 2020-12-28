@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebElement;
 
@@ -34,20 +35,20 @@ public class MainPage extends BasePage {
     public static final String DELETE_TEAM_STEP_1 = "Удалить команду";
     public static final String DELETE_TEAM_STEP_2 = "Удалить навсегда";
 
+    @Step("open MainPage https://trello.com/viktoryia_/boards")
     public MainPage openPage() {
-        log.fatal("open MainPage https://trello.com/viktoryia_/boards");
         open(URL);
         return this;
     }
 
+    @Step("check that page https://trello.com/viktoryia_/boards is opened")
     public MainPage isPageOpened() {
-        log.fatal("check that page https://trello.com/viktoryia_/boards is opened");
         $(byClassName(PAGE_OPEN)).waitUntil(exist, 30000, 500);
         return this;
     }
 
     public void createTeam(String teamName, String description, String teamType, String participant) {
-        log.fatal("click to start creating team");
+        log.info("click to start creating team");
         $(byClassName(CREATE_TEAM_START)).waitUntil(Condition.visible, 30000, 500).click();
         log.info("find input and enter name of team");
         $(byClassName(TEAM_NAME_INPUT)).sendKeys(teamName);
@@ -70,7 +71,7 @@ public class MainPage extends BasePage {
     }
 
     public BoardPage createBoard(String boardName) {
-        log.fatal("click to start creating board");
+        log.info("click to start creating board");
         $(byText(CREATE_BOARD_START)).waitUntil(Condition.visible, 30000, 500).click();
         log.info("find input and enter name of board");
         $(byClassName(BOARD_NAME_INPUT)).sendKeys(boardName);

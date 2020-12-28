@@ -1,6 +1,6 @@
 package pages;
 
-import com.codeborne.selenide.Condition;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 
 import static com.codeborne.selenide.Condition.exist;
@@ -16,20 +16,20 @@ public class EnterPage extends BasePage {
     public static final String PAGE_OPEN = "[class = 'lead']";
     public static final String URL = "https://trello.com";
 
+    @Step("open EnterPage trello.com")
     public EnterPage openPage()  {
-        log.fatal("open EnterPage trello.com");
         open(URL);
         return this;
     }
 
+    @Step("check that page trello.com is opened")
     public EnterPage isPageOpened() {
-        log.info("check that page trello.com is opened");
         $(byCssSelector(PAGE_OPEN)).waitUntil(exist, 30000, 500);
         return this;
     }
 
+    @Step("go to LoginPage")
     public LoginPage startAndEnter() {
-        log.info("go to LoginPage");
         $(byText(ENTER_BUTTON)).click();
         return new LoginPage();
     }
