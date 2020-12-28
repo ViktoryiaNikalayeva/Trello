@@ -1,11 +1,13 @@
 package tests;
 
+import io.qameta.allure.Step;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
 public class BoardTest extends BaseTest {
 
+    @Step("Board should be created")
     @Test(priority = 1, description = "board should be created")
     public void boardShouldBeCreated() {
         enterPage
@@ -20,9 +22,11 @@ public class BoardTest extends BaseTest {
         mainPage
                 .isPageOpened()
                 .createBoard("GreatDeal");
+
         assertEquals(boardPage.isBoardCreated().getText(), "доска");
     }
 
+    @Step("Lists should be created")
     @Test(priority = 2, description = "lists should be created")
     public void listShouldBeCreated() {
         enterPage
@@ -49,6 +53,7 @@ public class BoardTest extends BaseTest {
         assertEquals(boardPage.isListCreated("Готово").getText(), "Готово");
     }
 
+    @Step("Cards should be created")
     @Test(priority = 3, description = "cards should be created")
     public void cardShouldBeCreated() {
         enterPage
@@ -75,6 +80,7 @@ public class BoardTest extends BaseTest {
         assertEquals(boardPage.isCardCreated("Дело №58").getText(), "Дело №58");
     }
 
+    @Step("List should be copied and created")
     @Test(priority = 4, description = "list should be copied and created")
     public void listShouldBeCopiedAndCreated() {
         enterPage
@@ -97,7 +103,8 @@ public class BoardTest extends BaseTest {
         assertEquals(boardPage.isListCreated("Завершённые процессы").getText(), "Завершённые процессы");
     }
 
-    @Test(priority = 4, description = "signature should be exist")
+    @Step("Check that signature exist")
+    @Test(priority = 5, description = "signature should be exist")
     public void signature() {
         enterPage
                 .openPage()
@@ -115,10 +122,71 @@ public class BoardTest extends BaseTest {
                 .isPageOpened()
                 .signatureAtCard(0)
                 .isSignatureExist();
-
     }
 
-    @Test(priority = 4, description = "board should be deleted")
+    @Step("Card: add mark, write checklist, create template and card as a template")
+    @Test(priority = 6, description = "card should be archived and deleted")
+    public void actionsWithCard() {
+        enterPage
+                .openPage()
+                .isPageOpened()
+                .startAndEnter();
+        loginPage
+                .openPage()
+                .isPageOpened()
+                .login();
+        assertEquals(loginPage.isUserLogined().getText(), "Viktoryia");
+        mainPage
+                .isPageOpened()
+                .choosingBoard("GreatDeal");
+        boardPage
+                .isPageOpened()
+                .cardActions("Дело №58");
+    }
+
+
+    @Step("Card should be archived and deleted")
+    @Test(priority = 7, description = "card should be archived and deleted")
+    public void cardShouldBeArchivedAndDeleted() {
+        enterPage
+                .openPage()
+                .isPageOpened()
+                .startAndEnter();
+        loginPage
+                .openPage()
+                .isPageOpened()
+                .login();
+        assertEquals(loginPage.isUserLogined().getText(), "Viktoryia");
+        mainPage
+                .isPageOpened()
+                .choosingBoard("GreatDeal");
+        boardPage
+                .isPageOpened()
+                .archiveAndDeleteCard("Дело №36");
+    }
+    @Step("List should be archive")
+    @Test(priority = 8, description = "list should be archived")
+    public void listShouldBeArchived() {
+        enterPage
+                .openPage()
+                .isPageOpened()
+                .startAndEnter();
+        loginPage
+                .openPage()
+                .isPageOpened()
+                .login();
+        assertEquals(loginPage.isUserLogined().getText(), "Viktoryia");
+        mainPage
+                .isPageOpened()
+                .choosingBoard("GreatDeal");
+        boardPage
+                .isPageOpened()
+                .archiveList(0)
+                .isListArchived();
+    }
+
+    @Step("Board should be deleted")
+    @Test(priority = 9, description = "board should be deleted")
     public void boardShouldBeDeleted() {
         enterPage
                 .openPage()
@@ -135,6 +203,7 @@ public class BoardTest extends BaseTest {
         boardPage
                 .isPageOpened()
                 .deleteBoard();
+
         assertEquals(boardPage.isBoardDeleted().getText(), "Доска не найдена.");
     }
 }

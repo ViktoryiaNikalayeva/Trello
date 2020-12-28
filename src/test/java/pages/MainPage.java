@@ -1,11 +1,14 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
+@Log4j2
 public class MainPage extends BasePage {
 
     public static final String URL = "https://trello.com/viktoryia_/boards";
@@ -27,30 +30,49 @@ public class MainPage extends BasePage {
     public static final String CREATE_BOARD_FINISH = "//*[@class= '_2SGKaE34Vsusf2']/child::button";
     public static final String TEAM_CREATE_TRUE = "_2DZdmHnY2Nw7gI";
     public static final String CORRECT_BOARD_TRUE = "//h1[@dir = 'auto']";
+    public static final String SETTINGS = "Настройки";
+    public static final String DELETE_TEAM_STEP_1 = "Удалить команду";
+    public static final String DELETE_TEAM_STEP_2 = "Удалить навсегда";
 
     public MainPage openPage() {
+        log.fatal("open MainPage https://trello.com/viktoryia_/boards");
         open(URL);
         return this;
     }
 
     public MainPage isPageOpened() {
-        $(byClassName(PAGE_OPEN)).waitUntil(exist, 24000);
+        log.fatal("check that page https://trello.com/viktoryia_/boards is opened");
+        $(byClassName(PAGE_OPEN)).waitUntil(exist, 30000, 500);
         return this;
     }
 
     public void createTeam(String teamName, String description, String teamType, String participant) {
-        $(byClassName(CREATE_TEAM_START)).click();
+        log.fatal("click to start creating team");
+        $(byClassName(CREATE_TEAM_START)).waitUntil(Condition.visible, 30000, 500).click();
+        log.info("find input and enter name of team");
         $(byClassName(TEAM_NAME_INPUT)).sendKeys(teamName);
         $(byClassName(TYPE_TEAM_DROPDOWN)).click();
+        log.info("choose type of team");
         $(byXpath(TEAM_TYPE(teamType))).click();
+        log.info("write the description for team");
         $(byClassName(DESCRIPTION)).setValue(description);
         $(byClassName(CREATE_TEAM_CLICK)).click();
+        log.info("add participants");
         $(byClassName(PARTICIPANT_INPUT)).sendKeys(participant);
         $(byCssSelector(PARTICIPANT_CLICK)).click();
     }
 
+    public void deleteTeam(String teamName) {
+        $$(byText(SETTINGS)).get(0).click();
+        $(byText(DELETE_TEAM_STEP_1)).click();
+        $(byValue(DELETE_TEAM_STEP_2)).click();
+
+    }
+
     public BoardPage createBoard(String boardName) {
-        $(byText(CREATE_BOARD_START)).click();
+        log.fatal("click to start creating board");
+        $(byText(CREATE_BOARD_START)).waitUntil(Condition.visible, 30000, 500).click();
+        log.info("find input and enter name of board");
         $(byClassName(BOARD_NAME_INPUT)).sendKeys(boardName);
         $(byXpath(CREATE_BOARD_FINISH)).click();
         return new BoardPage();
@@ -61,7 +83,7 @@ public class MainPage extends BasePage {
     }
 
     public MainPage choosingBoard(String boardName) {
-        $(byXpath("//div[@title =" + boardName + "]")).click();
+        $(byXpath("//div[@title ='" + boardName + "']")).click();
         return this;
     }
     public WebElement isCorrectBoardChosen() {

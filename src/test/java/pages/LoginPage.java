@@ -1,15 +1,18 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebElement;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
+@Log4j2
 public class LoginPage extends BasePage {
     String email;
     String password;
@@ -20,65 +23,69 @@ public class LoginPage extends BasePage {
     public static final String PASSWORD =  "password";
     public static final String LOGIN_BUTTON = "login";
     public static final String LOGIN_BUTTON_FINISH = "css-t5emrf";
-    public static final String ERR_MESS_1 = "//div[@id='error']/child::*";
+    public static final String ERR_MESS_1 = "Не удается войти?";
     public static final String ERR_MESS_2 = "Войдите, чтобы перейти далее:";
-    public static final String ERR_MESS_3 = "Не удается войти?";
     public static final String BUTTON_TO_USER = "_24AWINHReYjNBf";
     public static final String USER_NAME= "_1njv2a9PIrnydF";
 
     public LoginPage openPage() {
+        log.fatal("open LoginPage trello.com/login");
         open(URL);
         return this;
     }
 
     public LoginPage isPageOpened() {
-        $(byClassName(PAGE_OPEN_TRUE)).waitUntil(Condition.visible, 24000);
+        log.debug("check that page trello.com/login is opened");
+        $(byClassName(PAGE_OPEN_TRUE)).waitUntil(exist, 30000, 500);
         return this;
     }
 
     public MainPage login()  {
+        log.fatal("open LoginPage trello.com/login");
         open(URL);
-        $(byId(USER)).sendKeys(email);
-        $(byId(PASSWORD)).sendKeys(password);
-        $(byId(LOGIN_BUTTON)).click();
-        sleep(2000);
-        $(byId(PASSWORD)).sendKeys(password);
-        $(byClassName(LOGIN_BUTTON_FINISH)).click();
+        log.info("find input of email and enter email");
+        $(byId(USER)).waitUntil(Condition.visible, 30000, 500).sendKeys(email);
+        sleep(1000);
+        $(byId(LOGIN_BUTTON)).waitUntil(exist, 30000, 500).click();
+        sleep(1000);
+        $(byId(PASSWORD)).waitUntil(exist, 30000, 500).sendKeys(password);
+        $(byClassName(LOGIN_BUTTON_FINISH)).waitUntil(exist, 30000, 500).click();
         return new MainPage();
     }
 
-    public void loginForErrorVars1and3(String email, String password) {
+    public void loginForErrorVars1(String email, String password) {
+        log.fatal("open LoginPage trello.com/login");
         open(URL);
-        $(byId(USER)).sendKeys(email);
+        log.info("find input of email and enter email");
+        $(byId(USER)).waitUntil(Condition.visible, 30000, 500).sendKeys(email);
+        log.info("find input of password and enter password");
         $(byId(PASSWORD)).sendKeys(password);
         $(byId(LOGIN_BUTTON)).click();
     }
 
     public void loginForErrorVars2(String email, String password) {
+        log.fatal("open LoginPage trello.com/login");
         open(URL);
-        $(byId(USER)).sendKeys(email);
-        $(byId(PASSWORD)).sendKeys(password);
+        log.info("find input of email and enter email");
+        $(byId(USER)).waitUntil(Condition.visible, 30000, 500).sendKeys(email);
         $(byId(LOGIN_BUTTON)).click();
         sleep(2000);
-        $(byId(PASSWORD)).sendKeys(password);
-        $(byClassName(LOGIN_BUTTON_FINISH)).click();
+        log.info("find input of password and enter password");
+        $(byId(PASSWORD)).waitUntil(Condition.visible, 30000, 500).sendKeys(password);
+        $(byClassName(LOGIN_BUTTON_FINISH)).waitUntil(exist, 30000, 500).click();
     }
 
-    public WebElement getErrorMessage1()
-    {
-        return $(byXpath(ERR_MESS_1));
+    public WebElement getErrorMessage1() {
+        return $(byText(ERR_MESS_1));
     }
     public WebElement getErrorMessage2() {
         return $(byText(ERR_MESS_2));
     }
-    public WebElement getErrorMessage3() {
-        return $(byText(ERR_MESS_3));
-    }
+
 
     public WebElement isUserLogined () {
         $(byClassName(BUTTON_TO_USER)).click();
         return $(byClassName(USER_NAME));
-
     }
 
     public LoginPage() {
