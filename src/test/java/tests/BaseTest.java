@@ -28,7 +28,7 @@ public class BaseTest {
         Configuration.startMaximized = true;
         Configuration.timeout = 30000;
         Configuration.headless = false;
-        Configuration.reportsFolder = "target/reports";
+        Configuration.reportsFolder = "target/site/allure-maven-plugin/data";
         loginPage = new LoginPage();
         mainPage = new MainPage();
         boardPage = new BoardPage();
