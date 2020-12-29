@@ -24,7 +24,7 @@ public class BaseTest {
     @BeforeMethod(description = "configuration and initialization")
     public void setup() {
 
-        Configuration.browser = "opera";
+        Configuration.browser = "chrome";
         Configuration.startMaximized = true;
         Configuration.timeout = 30000;
         Configuration.headless = false;
