@@ -1,8 +1,10 @@
 package tests;
 
 
+import com.codeborne.selenide.testng.ScreenShooter;
 import io.qameta.allure.Step;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 
@@ -12,11 +14,11 @@ import java.util.Properties;
 
 import static org.testng.Assert.assertEquals;
 
+@Listeners({ ScreenShooter.class})
 public class LoginTest extends BaseTest {
     String email;
     String password;
     public static final String PATH_TO_PROPERTIES = "src/test/resources/config.properties";
-
 
     @Step("User should pass authorization and appear at MainPage")
     @Test(description = "user should pass authorization and appear at MainPage")
@@ -32,7 +34,7 @@ public class LoginTest extends BaseTest {
         assertEquals(loginPage.isUserLogined().getText(), "Viktoryia");
     }
 
-    @Step("Check errors of authorization (null and incorrect email + variants)")
+
     @DataProvider
     public Object[][] errorVars1() {
         return new Object[][]{
@@ -45,7 +47,7 @@ public class LoginTest extends BaseTest {
                 {"guy@gmail.com", "", "Не удается войти?"},
         };
     }
-
+    @Step("Check errors of authorization (null and incorrect email + variants)")
     @Test(dataProvider = "errorVars1", description = "check errors of authorization (null email + variants)")
     public void errorVars1(String email, String password, String errorMessage1) {
         loginPage
@@ -55,7 +57,7 @@ public class LoginTest extends BaseTest {
         assertEquals(loginPage.getErrorMessage1().getText(), errorMessage1);
     }
 
-    @Step("Check errors of authorization (correct email + variants")
+
     @DataProvider
     public Object[][] errorVars2() {
         return new Object[][]{
@@ -63,7 +65,7 @@ public class LoginTest extends BaseTest {
                 {email, "Fawkes", "Войдите, чтобы перейти далее:"},
         };
     }
-
+    @Step("Check errors of authorization (correct email + variants")
     @Test(dataProvider = "errorVars2", description = "check errors of authorization (correct email + variants)")
     public void errorVars2(String email, String password, String errorMessage2) {
         loginPage
