@@ -15,6 +15,7 @@ jobs:
     steps:
       - browser-tools/install-browser-tools:
           chrome-version: 87.0.4280.88
+          replace-existing: true
       - checkout
       - restore_cache:
           keys:
