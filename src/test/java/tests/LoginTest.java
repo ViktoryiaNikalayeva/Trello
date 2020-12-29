@@ -50,6 +50,10 @@ public class LoginTest extends BaseTest {
     @Step("Check errors of authorization (null and incorrect email + variants)")
     @Test(dataProvider = "errorVars1", description = "check errors of authorization (null email + variants)")
     public void errorVars1(String email, String password, String errorMessage1) {
+        enterPage
+                .openPage()
+                .isPageOpened()
+                .startAndEnter();
         loginPage
                 .openPage()
                 .isPageOpened()
@@ -68,6 +72,10 @@ public class LoginTest extends BaseTest {
     @Step("Check errors of authorization (correct email + variants")
     @Test(dataProvider = "errorVars2", description = "check errors of authorization (correct email + variants)")
     public void errorVars2(String email, String password, String errorMessage2) {
+        enterPage
+                .openPage()
+                .isPageOpened()
+                .startAndEnter();
         loginPage
                 .openPage()
                 .isPageOpened()
