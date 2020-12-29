@@ -49,6 +49,7 @@ public class LoginPage extends BasePage {
         open(URL);
         log.info("find input of email and enter email");
         $(byId(USER)).waitUntil(Condition.visible, 30000, 500).sendKeys(email);
+        $(byId(PASSWORD)).waitUntil(exist, 30000, 500).sendKeys(password);
         sleep(1000);
         $(byId(LOGIN_BUTTON)).waitUntil(exist, 30000, 500).click();
         sleep(1000);
@@ -73,6 +74,7 @@ public class LoginPage extends BasePage {
         open(URL);
         log.info("find input of email and enter email");
         $(byId(USER)).waitUntil(Condition.visible, 30000, 500).sendKeys(email);
+        $(byId(PASSWORD)).waitUntil(exist, 30000, 500).sendKeys(password);
         $(byId(LOGIN_BUTTON)).click();
         sleep(2000);
         log.info("find input of password and enter password");
