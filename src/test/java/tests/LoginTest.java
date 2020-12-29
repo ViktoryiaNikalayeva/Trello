@@ -39,12 +39,12 @@ public class LoginTest extends BaseTest {
     public Object[][] errorVars1() {
         return new Object[][]{
 
-                {"", password, "Не удается войти?"},
-                {"", "", "Не удается войти?"},
-                {"", "Fawkes", "Не удается войти?"},
-                {"guy@gmail.com", "Fawkes", "Не удается войти?"},
-                {"guy@gmail.com", password, "Не удается войти?"},
-                {"guy@gmail.com", "", "Не удается войти?"},
+                {"", password, "Can't log in?"},
+                {"", "", "Can't log in?"},
+                {"", "Fawkes", "Can't log in?"},
+                {"guy@gmail.com", "Fawkes", "Can't log in?"},
+                {"guy@gmail.com", password, "Can't log in?"},
+                {"guy@gmail.com", "", "Can't log in?"},
         };
     }
     @Step("Check errors of authorization (null and incorrect email + variants)")
@@ -61,8 +61,8 @@ public class LoginTest extends BaseTest {
     @DataProvider
     public Object[][] errorVars2() {
         return new Object[][]{
-                {email, "", "Войдите, чтобы перейти далее:"},
-                {email, "Fawkes", "Войдите, чтобы перейти далее:"},
+                {email, "", "Log in to your account"},
+                {email, "Fawkes", "Log in to your account"},
         };
     }
     @Step("Check errors of authorization (correct email + variants")

@@ -24,7 +24,7 @@ public class MainTest extends BaseTest {
         mainPage.isPageOpened()
                 .createTeam("DreamTeam", "Test for test",
                         "Маркетинг", "n77@mailinator.com");
-       assertEquals(mainPage.isTeamCreated().getText(), "Изменить информацию о команде");
+       assertEquals(mainPage.isTeamCreated().getText(), "Edit team details");
     }
 
     @Step("Team should be deleted")

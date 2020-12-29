@@ -1,8 +1,6 @@
 package tests;
 
-import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.Step;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -25,7 +23,7 @@ public class BoardTest extends BaseTest {
                 .isPageOpened()
                 .createBoard("GreatDeal");
 
-        assertEquals(boardPage.isBoardCreated().getText(), "доска");
+        assertEquals(boardPage.isBoardCreated().getText(), "Board");
     }
 
     @Step("Lists should be created")
@@ -206,6 +204,6 @@ public class BoardTest extends BaseTest {
                 .isPageOpened()
                 .deleteBoard();
 
-        assertEquals(boardPage.isBoardDeleted().getText(), "Доска не найдена.");
+        assertEquals(boardPage.isBoardDeleted().getText(), "Board not found.");
     }
 }
