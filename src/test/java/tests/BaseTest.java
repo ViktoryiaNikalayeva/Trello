@@ -29,6 +29,7 @@ public class BaseTest {
         Configuration.timeout = 30000;
         Configuration.headless = false;
         Configuration.reportsFolder = "target/site/allure-maven-plugin/data";
+        System.setProperty("chromeoptions.prefs","intl.accept_languages=ru");
         loginPage = new LoginPage();
         mainPage = new MainPage();
         boardPage = new BoardPage();
