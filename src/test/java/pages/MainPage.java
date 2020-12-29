@@ -26,14 +26,14 @@ public class MainPage extends BasePage {
     public static final String CREATE_TEAM_CLICK = "_1aS0LdGertk5P7";
     public static final String PARTICIPANT_INPUT = "autocomplete-input";
     public static final String PARTICIPANT_CLICK = "[data-test-id = 'team-invite-submit-button']";
-    public static final String CREATE_BOARD_START = "Создать доску";
+    public static final String CREATE_BOARD_START = "Create new board";
     public static final String BOARD_NAME_INPUT = "_23NUW98LaZfBpQ";
     public static final String CREATE_BOARD_FINISH = "//*[@class= '_2SGKaE34Vsusf2']/child::button";
     public static final String TEAM_CREATE_TRUE = "_2DZdmHnY2Nw7gI";
     public static final String CORRECT_BOARD_TRUE = "//h1[@dir = 'auto']";
-    public static final String SETTINGS = "Настройки";
-    public static final String DELETE_TEAM_STEP_1 = "Удалить команду";
-    public static final String DELETE_TEAM_STEP_2 = "Удалить навсегда";
+    public static final String SETTINGS = "Settings";
+    public static final String DELETE_TEAM_STEP_1 = "Delete this team?";
+    public static final String DELETE_TEAM_STEP_2 = "Delete Forever";
 
     @Step("open MainPage https://trello.com/viktoryia_/boards")
     public MainPage openPage() {

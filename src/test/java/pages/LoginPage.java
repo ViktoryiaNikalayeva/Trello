@@ -24,8 +24,8 @@ public class LoginPage extends BasePage {
     public static final String PASSWORD =  "password";
     public static final String LOGIN_BUTTON = "login";
     public static final String LOGIN_BUTTON_FINISH = "css-t5emrf";
-    public static final String ERR_MESS_1 = "Не удается войти?";
-    public static final String ERR_MESS_2 = "Войдите, чтобы перейти далее:";
+    public static final String ERR_MESS_1 = "Can't log in?";
+    public static final String ERR_MESS_2 = "Log in to your account";
     public static final String BUTTON_TO_USER = "_24AWINHReYjNBf";
     public static final String USER_NAME= "_1njv2a9PIrnydF";
 

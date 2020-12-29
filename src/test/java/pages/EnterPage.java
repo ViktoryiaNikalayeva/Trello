@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.open;
 @Log4j2
 public class EnterPage extends BasePage {
 
-    public static final String ENTER_BUTTON = "Войти";
+    public static final String ENTER_BUTTON = "Log In";
     public static final String PAGE_OPEN = "[class = 'lead']";
     public static final String URL = "https://trello.com";
 
