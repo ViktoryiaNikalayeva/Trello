@@ -28,6 +28,7 @@ public class BaseTest {
         Configuration.startMaximized = true;
         Configuration.timeout = 30000;
         Configuration.headless = false;
+        Configuration.reportsFolder = "target/reports";
         loginPage = new LoginPage();
         mainPage = new MainPage();
         boardPage = new BoardPage();
@@ -41,7 +42,7 @@ public class BaseTest {
         try {
             getWebDriver().quit();
         } catch (IllegalStateException ex) {
-            log.warn("WebDriver is not opened on attempt to close it");
+            log.warn("WebDriver is not opened");
             log.warn(ex.getLocalizedMessage());
         }
 
