@@ -26,7 +26,7 @@ public class LoginPage extends BasePage {
     public static final String LOGIN_BUTTON_FINISH = "css-t5emrf";
     public static final String ERR_MESS_1 = "Can't log in?";
     public static final String ERR_MESS_2 = "Log in to your account";
-    public static final String BUTTON_TO_USER = "Viktoryia (viktoryia_)";
+    public static final String BUTTON_TO_USER = "_24AWINHReYjNBf aYXvcYtXemTcSj";
     public static final String USER_NAME= "_1njv2a9PIrnydF";
 
 
@@ -89,7 +89,7 @@ public class LoginPage extends BasePage {
 
 
     public WebElement isUserLogined () {
-        $(byTitle(BUTTON_TO_USER)).click();
+        $(byClassName(BUTTON_TO_USER)).click();
         return $(byClassName(USER_NAME));
     }
 
