@@ -11,6 +11,8 @@ jobs:
     environment:
     # get from git and get maven dependencies
     steps:
+      - browser-tools/install-browser-tools:
+          chrome-version: 87.0.4280.88
       - checkout
       - restore_cache:
           keys:
